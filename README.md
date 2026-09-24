@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Miraf
 
-## Getting Started
+Miraf (ምዕራፍ, “chapter”) is a calm, local-first EPUB reader. Import a DRM-free EPUB, keep it in this browser, and return to the last reading position without an account.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Production checks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm lint
+pnpm test
+pnpm build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## V1 behavior
 
-## Learn More
+- Import DRM-free, reflowable EPUB 2 or 3 files up to 50 MiB. Miraf checks the archive, reads metadata and cover when available, and rejects duplicate files.
+- Store book records, original files, covers, and reading positions in IndexedDB. Reader appearance preferences use localStorage. Clearing site data or switching browser profiles removes the local library.
+- Read in pages or a scrolling layout. Navigate with controls, table of contents, arrow keys, or a horizontal swipe in paginated mode.
+- Choose light, sepia, or dark pages; font, size, line height, and reading width. EPUB scripts remain disabled.
 
-To learn more about Next.js, take a look at the following resources:
+The browser must load the application itself, but books do not require an account or cloud service. Clerk and Supabase are future additions; the current UI talks to a `BookRepository` interface through `libraryService`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project map
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app/page.tsx` and `src/app/read/[bookId]/page.tsx`: App Router entry points.
+- `src/components/library` and `src/components/reader`: library and browser-only reader UI.
+- `src/lib/epub`: archive validation and EPUB import.
+- `src/lib/persistence`: versioned IndexedDB schema and repository implementation.
+- `src/lib/services/library-service.ts`: UI-facing local data operations.
+- `src/stores/reader-store.ts`: transient reader controls and persisted appearance preferences.
+- `DESIGN.md`: Miraf’s implemented visual system. The supplied Nova source is preserved in `design-reference/`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The test fixture under `tests/e2e/fixtures/` is a tiny generated EPUB for exercising import and rendering. `tests/e2e/capture-review.mjs` captures the populated library and reader at desktop and mobile widths when a production server is running.

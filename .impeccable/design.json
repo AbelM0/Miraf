@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-24T03:08:49.000Z",
+  "title": "Design System: Miraf",
+  "extensions": {
+    "colorMeta": {
+      "forest-ink": { "role": "primary", "displayName": "Forest Ink", "canonical": "#173f36" },
+      "paper": { "role": "neutral", "displayName": "Book Paper", "canonical": "#faf7f0" },
+      "ink": { "role": "neutral", "displayName": "Reading Ink", "canonical": "#292c29" },
+      "reader-sepia": { "role": "neutral", "displayName": "Sepia Page", "canonical": "#f2e7cf" },
+      "reader-dark": { "role": "neutral", "displayName": "Night Page", "canonical": "#1d2421" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Literary Display", "purpose": "Library introduction and primary headings." },
+      "body": { "displayName": "Utility Body", "purpose": "Metadata, descriptions, and controls." }
+    },
+    "shadows": [
+      { "name": "book-cover", "value": "0 16px 38px -24px rgba(18,60,53,0.65)", "purpose": "A restrained lift for real or fallback book covers." }
+    ],
+    "motion": [
+      { "name": "ledger-settle", "value": "translateY(5px) to translateY(0), 280ms ease-out", "purpose": "A short arrival for library rows; disabled by reduced-motion preference." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The principal import or reading action.",
+      "html": "<button class=\"ds-button-primary\">Add Book</button>",
+      "css": ".ds-button-primary{height:44px;padding:0 16px;border:0;border-radius:10px;background:#173f36;color:#fffdf8;font:500 14px Inter,Arial,sans-serif;cursor:pointer;transition:background-color .2s}.ds-button-primary:hover{background:#254f45}.ds-button-primary:focus-visible{outline:2px solid #35675b;outline-offset:3px}"
+    },
+    {
+      "name": "Ledger Row",
+      "kind": "custom",
+      "refersTo": "ledger-row",
+      "description": "A ruled book entry with cover, identity, and progress.",
+      "html": "<div class=\"ds-ledger-row\"><div class=\"ds-book-cover\">M</div><div><strong>The Quiet Chapter</strong><small>Miraf</small></div><span class=\"ds-progress\">42%</span></div>",
+      "css": ".ds-ledger-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #ded8cc;color:#292c29;font:14px Inter,Arial,sans-serif}.ds-ledger-row strong{display:block;font:400 21px 'Instrument Serif',Georgia,serif}.ds-ledger-row small{display:block;margin-top:4px;color:#686b66}.ds-book-cover{display:grid;place-items:center;width:56px;height:84px;border-radius:10px;background:#173f36;color:#fffdf8;font:400 30px 'Instrument Serif',Georgia,serif}.ds-progress{color:#686b66}"
+    },
+    {
+      "name": "Continue Panel",
+      "kind": "card",
+      "refersTo": "continue-panel",
+      "description": "One broad featured book with a clear next action.",
+      "html": "<section class=\"ds-continue-panel\"><span>Continue reading</span><h2>The Quiet Chapter</h2><p>Miraf</p><button>Continue</button></section>",
+      "css": ".ds-continue-panel{padding:24px;border:1px solid #ded8cc;border-radius:14px;background:#fdfbf7;color:#292c29}.ds-continue-panel span{font:500 12px Inter,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#686b66}.ds-continue-panel h2{margin:12px 0 4px;font:400 36px 'Instrument Serif',Georgia,serif}.ds-continue-panel p{margin:0 0 24px;color:#686b66;font:14px Inter,Arial,sans-serif}.ds-continue-panel button{height:44px;padding:0 16px;border:0;border-radius:10px;background:#173f36;color:#fffdf8;font:500 14px Inter,Arial,sans-serif}.ds-continue-panel button:hover{background:#254f45}.ds-continue-panel button:focus-visible{outline:2px solid #35675b;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Chapter Ledger",
+    "overview": "A personal library arranged like a well-kept reading list. Warm paper, deep green ink, and large literary type lead to a quieter page-centered reader.",
+    "keyCharacteristics": ["ruled editorial rows", "bounded reading measure", "restrained green actions", "light, sepia, and dark reading surfaces"],
+    "rules": [
+      { "name": "Book First", "body": "The book and next reading action lead; interface furniture recedes in the reader.", "section": "layout" },
+      { "name": "Flat by Default", "body": "Use fine rules and tonal separation; reserve shadow for covers.", "section": "elevation" }
+    ],
+    "dos": ["Keep long-form text at a readable measure.", "Retain covers in mobile library compositions."],
+    "donts": ["Add decorative dashboards or fake book content.", "Let controls compete with the EPUB page."]
+  }
+}

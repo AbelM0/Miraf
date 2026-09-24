@@ -42,4 +42,5 @@ next-env.d.ts
 
 .agents
 .codex
-.impeccable
+.impeccable/*
+!.impeccable/design.json

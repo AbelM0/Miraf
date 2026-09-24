@@ -49,8 +49,8 @@ Miraf leads with a calm reading experience. Local-first storage, no mandatory ac
 
 ## Evidence on Hand
 
-- `DESIGN.md` is a user-supplied visual reference in the project root.
-- The repository contains the planned Next.js foundation and UI primitives, but no implemented Miraf product surface yet.
+- `DESIGN.md` records the implemented Miraf visual system. The user-supplied Nova reference is preserved in `design-reference/nova-os-landing-page-DESIGN.md`.
+- The repository contains the Next.js library and reader, local persistence, EPUB import and rendering, and focused tests.
 - No final Miraf logo file, production copy set, testimonials, customer claims, usage data, or public proof assets are currently present. Future work must not fabricate them.
 
 ## Product Principles

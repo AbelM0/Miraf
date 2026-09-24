@@ -4,12 +4,13 @@ import path from "node:path";
 const root = process.cwd();
 const fixture = path.join(root, "tests/e2e/fixtures/minimal.epub");
 const output = path.join(root, ".impeccable/review");
+const baseUrl = process.argv[2] ?? "http://localhost:3000";
 
 async function capture(width, height, suffix) {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ viewport: { width, height } });
   const page = await context.newPage();
-  await page.goto("http://localhost:3000");
+  await page.goto(baseUrl);
   await page.locator('input[type="file"]').first().setInputFiles(fixture);
   await page.getByRole("link", { name: "The Quiet Chapter" }).nth(1).waitFor({ timeout: 15_000 });
   await page.waitForTimeout(4_500);

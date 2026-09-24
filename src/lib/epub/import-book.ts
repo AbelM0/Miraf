@@ -1,16 +1,18 @@
 import type { BookRepository } from "@/lib/persistence/book-repository";
 import type { BookMetadata, ImportedBook } from "@/types/book";
 import { EpubImportError } from "@/lib/epub/errors";
+import { validateEpubArchive } from "@/lib/epub/validate-epub";
 
 const MAX_EPUB_BYTES = 50 * 1024 * 1024;
 
 type EpubMetadata = {
-  title?: string;
-  creator?: string;
-  publisher?: string;
-  language?: string;
-  description?: string;
-  identifier?: string;
+  title?: unknown;
+  creator?: unknown;
+  publisher?: unknown;
+  language?: unknown;
+  description?: unknown;
+  identifier?: unknown;
+  layout?: unknown;
 };
 
 type EpubBook = {
@@ -20,8 +22,8 @@ type EpubBook = {
   destroy(): void;
 };
 
-function cleanText(value: string | undefined) {
-  const trimmed = value?.replace(/\s+/g, " ").trim();
+function cleanText(value: unknown) {
+  const trimmed = typeof value === "string" ? value.replace(/\s+/g, " ").trim() : undefined;
   return trimmed || undefined;
 }
 
@@ -60,6 +62,7 @@ export async function importEpub(
   repository: BookRepository,
 ): Promise<ImportedBook> {
   validateFile(file);
+  await validateEpubArchive(file);
   const fileFingerprint = await fingerprint(file);
   if (await repository.findByFingerprint(fileFingerprint)) {
     throw new EpubImportError("This book is already in your library.", "duplicate");
@@ -71,6 +74,9 @@ export async function importEpub(
     epubBook = ePub(await file.arrayBuffer()) as unknown as EpubBook;
     await epubBook.ready;
     const rawMetadata = await epubBook.loaded.metadata;
+    if (rawMetadata.layout === "pre-paginated") {
+      throw new EpubImportError("Fixed-layout EPUBs are not supported in Miraf V1.", "unsupported");
+    }
     const metadata: BookMetadata = {
       title: cleanText(rawMetadata.title) ?? file.name.replace(/\.epub$/i, ""),
       author: cleanText(rawMetadata.creator),
@@ -106,4 +112,3 @@ export async function importEpub(
     epubBook?.destroy();
   }
 }
-
