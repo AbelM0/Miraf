@@ -12,8 +12,9 @@ import { ReaderToolbar } from "@/components/reader/reader-toolbar";
 import { TableOfContents } from "@/components/reader/table-of-contents";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { libraryService } from "@/lib/services/library-service";
+import { useLibraryService } from "@/components/library/library-provider";
 import { cn } from "@/lib/utils";
+import { resolveLocationProgress } from "@/lib/reader/progress";
 import { useReaderStore } from "@/stores/reader-store";
 import type { BookRecord } from "@/types/book";
 import type { ReaderFont, ReaderTheme, ReaderWidth, TocItem } from "@/types/reader";
@@ -152,6 +153,7 @@ async function settleScrolledTocTarget(container: HTMLElement, sectionIndex: num
 }
 
 export function ReaderScreen({ bookId }: { bookId: string }) {
+  const libraryService = useLibraryService();
   const router = useRouter();
   const viewportRef = useRef<HTMLDivElement>(null);
   const epubBookRef = useRef<EpubBook | undefined>(undefined);
@@ -239,21 +241,28 @@ export function ReaderScreen({ bookId }: { bookId: string }) {
     setCurrentTocId(undefined);
     container.replaceChildren();
 
-    const flushPosition = () => {
+    const flushPosition = (syncNow = false) => {
       if (!pendingPosition) return;
       const position = pendingPosition;
       pendingPosition = undefined;
       saveQueue = saveQueue.then(() =>
-        libraryService.savePosition(bookId, position.cfi, position.percentage),
+        libraryService.savePosition(bookId, position.cfi, position.percentage, syncNow),
       ).catch(() => {
         if (!cancelled) toast.error("Reading position could not be saved.");
       });
     };
-    const onPageHide = () => flushPosition();
+    const onPageHide = () => flushPosition(true);
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "hidden") flushPosition(true);
+    };
     window.addEventListener("pagehide", onPageHide);
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
     const start = async () => {
       try {
+        // On another browser, IndexedDB can be empty or stale. Reconcile the
+        // cloud position before choosing the EPUB.js display target.
+        if (navigator.onLine) await libraryService.sync().catch(() => undefined);
         const [record, file] = await Promise.all([libraryService.getBook(bookId), libraryService.getBookFile(bookId)]);
         setLoading(true);
         setError(undefined);
@@ -269,6 +278,9 @@ export function ReaderScreen({ bookId }: { bookId: string }) {
         epubBookRef.current = epubBook;
         await epubBook.ready;
         if (cancelled) return;
+        const locationsReady = epubBook.locations.length() > 0
+          ? Promise.resolve()
+          : epubBook.locations.generate(1500).then(() => undefined);
         const firstSection = epubBook.spine.first();
         if (!firstSection?.href) throw new Error("book has no readable spine item");
         let initialTarget = firstSection.href;
@@ -390,11 +402,11 @@ export function ReaderScreen({ bookId }: { bookId: string }) {
             try { percentage = epubBook.locations.percentageFromCfi(cfi); }
             catch { /* The CFI remains usable even when a percentage cannot be found. */ }
           }
-          const normalized = location.atEnd
-            ? 100
-            : typeof percentage === "number" && Number.isFinite(percentage)
-              ? Math.max(0, Math.min(100, percentage * 100))
-              : lastKnownProgress;
+          const normalized = resolveLocationProgress({
+            atStart: location.atStart,
+            atEnd: location.atEnd,
+            mappedPercentage: percentage,
+          }, lastKnownProgress);
           updatePosition(cfi, normalized);
         };
         rendition.on("relocated", onRelocated);
@@ -433,19 +445,11 @@ export function ReaderScreen({ bookId }: { bookId: string }) {
           await rendition.reportLocation().catch(() => undefined);
         }
         if (cancelled || readerSession !== readerSessionRef.current) return;
+        await locationsReady.catch(() => undefined);
+        if (cancelled || readerSession !== readerSessionRef.current) return;
+        await rendition.reportLocation().catch(() => undefined);
         setReaderReady(true);
         setLoading(false);
-        void epubBook.locations.generate(1500).then(() => {
-          if (cancelled || readerSession !== readerSessionRef.current) return;
-          const cfi = rendition.location?.start?.cfi;
-          if (cfi) {
-            try {
-              const percentage = epubBook.locations.percentageFromCfi(cfi);
-              if (Number.isFinite(percentage)) updatePosition(cfi, Math.max(0, Math.min(100, percentage * 100)));
-            } catch { /* Keep the last known progress when the current CFI cannot be mapped. */ }
-          }
-          return rendition.reportLocation();
-        }).catch(() => undefined);
         return () => rendition.off("relocated", onRelocated);
       } catch {
         if (!cancelled) { setError("This book is missing or could not be rendered in this browser."); setReaderReady(false); setLoading(false); }
@@ -460,15 +464,16 @@ export function ReaderScreen({ bookId }: { bookId: string }) {
       stopResize?.();
       resizeObserver?.disconnect();
       window.removeEventListener("pagehide", onPageHide);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       if (saveTimer) clearTimeout(saveTimer);
-      flushPosition();
+      flushPosition(true);
       renditionRef.current?.destroy();
       epubBookRef.current?.destroy();
       renditionRef.current = undefined;
       epubBookRef.current = undefined;
       container.replaceChildren();
     };
-  }, [bookId, navigate, navigateWithKeyboard]);
+  }, [bookId, libraryService, navigate, navigateWithKeyboard]);
 
   useEffect(() => {
     const rendition = renditionRef.current;

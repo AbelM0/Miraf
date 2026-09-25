@@ -1,65 +1,96 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-24T03:08:49.000Z",
+  "generatedAt": "2026-09-24T10:20:38.334Z",
   "title": "Design System: Miraf",
   "extensions": {
     "colorMeta": {
-      "forest-ink": { "role": "primary", "displayName": "Forest Ink", "canonical": "#173f36" },
-      "paper": { "role": "neutral", "displayName": "Book Paper", "canonical": "#faf7f0" },
-      "ink": { "role": "neutral", "displayName": "Reading Ink", "canonical": "#292c29" },
-      "reader-sepia": { "role": "neutral", "displayName": "Sepia Page", "canonical": "#f2e7cf" },
-      "reader-dark": { "role": "neutral", "displayName": "Night Page", "canonical": "#1d2421" }
+      "forest-ink": {"role":"primary","displayName":"Forest Ink","canonical":"#173F36","tonalRamp":["#071915","#0D2923","#173F36","#2F6257","#55877B","#83ADA4","#B9D3CD","#EBF4F1"]},
+      "warm-white": {"role":"neutral","displayName":"Warm White","canonical":"#FBFAF5","tonalRamp":["#24231E","#403F38","#625F55","#858278","#AAA79D","#CFCCC3","#E7E4DC","#FBFAF5"]},
+      "book-paper": {"role":"neutral","displayName":"Book Paper","canonical":"#FAF7F0","tonalRamp":["#24211A","#403C34","#625D53","#858076","#AAA59B","#CFCAC0","#E7E3DA","#FAF7F0"]},
+      "paper-surface": {"role":"neutral","displayName":"Paper Surface","canonical":"#FDFBF7","tonalRamp":["#25231F","#423F39","#64615A","#87847D","#ACA9A2","#D1CEC8","#E9E6E1","#FDFBF7"]},
+      "popover-paper": {"role":"neutral","displayName":"Popover Paper","canonical":"#FFFDF9","tonalRamp":["#26241F","#433F3A","#66625B","#89867E","#AEAAA4","#D3D0CA","#EBE8E3","#FFFDF9"]},
+      "reading-ink": {"role":"neutral","displayName":"Reading Ink","canonical":"#292C29","tonalRamp":["#171917","#292C29","#454945","#636763","#858985","#A9ADA9","#D0D3D0","#F1F3F1"]},
+      "soft-field": {"role":"neutral","displayName":"Soft Field","canonical":"#F0ECE3","tonalRamp":["#231F18","#3E3930","#5F594F","#817B70","#A49F94","#C8C2B8","#E1DCD2","#F7F3EB"]},
+      "sage-wash": {"role":"secondary","displayName":"Sage Wash","canonical":"#E1E8E2","tonalRamp":["#18211B","#303A33","#4D584F","#6D786F","#909B92","#B5BFB7","#D4DDD6","#F0F6F1"]},
+      "quiet-text": {"role":"neutral","displayName":"Quiet Text","canonical":"#686B66","tonalRamp":["#191B18","#30332F","#4C4F4A","#686B66","#8A8D88","#AEB1AC","#D3D6D1","#F2F4F1"]},
+      "ledger-rule": {"role":"neutral","displayName":"Ledger Rule","canonical":"#DED8CC","tonalRamp":["#211D16","#3A352C","#595248","#797267","#9B9589","#BFB8AD","#DED8CC","#F5F0E8"]},
+      "field-rule": {"role":"neutral","displayName":"Field Rule","canonical":"#D6D0C4","tonalRamp":["#201C15","#38332A","#554F45","#746D62","#969084","#B9B3A8","#D6D0C4","#F2EDE5"]},
+      "focus-green": {"role":"primary","displayName":"Focus Green","canonical":"#35675B","tonalRamp":["#0A1A16","#17342D","#255044","#35675B","#578A7E","#82ADA3","#B2D1CA","#E8F3F0"]},
+      "error-red": {"role":"tertiary","displayName":"Error Red","canonical":"oklch(0.577 0.245 27.325)","tonalRamp":["oklch(0.15 0.09 27.325)","oklch(0.27 0.14 27.325)","oklch(0.39 0.19 27.325)","oklch(0.52 0.23 27.325)","oklch(0.64 0.22 27.325)","oklch(0.75 0.17 27.325)","oklch(0.86 0.10 27.325)","oklch(0.95 0.04 27.325)"]},
+      "reader-light": {"role":"neutral","displayName":"Reader Light","canonical":"#FFFDF8","tonalRamp":["#26231E","#433F39","#66615A","#89847D","#AEA9A2","#D3CEC7","#EBE6E0","#FFFDF8"]},
+      "reader-sepia": {"role":"neutral","displayName":"Reader Sepia","canonical":"#F2E7CF","tonalRamp":["#251E12","#403522","#625138","#846F50","#A9916C","#CEB994","#E7D8B8","#FAF0D9"]},
+      "reader-dark": {"role":"neutral","displayName":"Reader Dark","canonical":"#1D2421","tonalRamp":["#111613","#1D2421","#38413D","#56605B","#78827D","#9FA8A3","#C8CECB","#EDF1EF"]}
     },
     "typographyMeta": {
-      "display": { "displayName": "Literary Display", "purpose": "Library introduction and primary headings." },
-      "body": { "displayName": "Utility Body", "purpose": "Metadata, descriptions, and controls." }
+      "display":{"displayName":"Literary Display","purpose":"Library and authentication introductions."},
+      "headline":{"displayName":"Editorial Headline","purpose":"Featured titles and major recovery states."},
+      "title":{"displayName":"Section Title","purpose":"Sections, dialogs, sheets, and ledger titles."},
+      "body":{"displayName":"Reading Utility","purpose":"Descriptions and instructions outside EPUB content."},
+      "label":{"displayName":"Interface Label","purpose":"Controls, fields, metadata, and status copy."}
     },
     "shadows": [
-      { "name": "book-cover", "value": "0 16px 38px -24px rgba(18,60,53,0.65)", "purpose": "A restrained lift for real or fallback book covers." }
+      {"name":"book-cover","value":"0 16px 38px -24px rgba(18, 60, 53, 0.65)","purpose":"Restrained physical lift for book covers."},
+      {"name":"reader-control","value":"0 1px 2px rgba(0, 0, 0, 0.05)","purpose":"Ambient separation for page controls."}
     ],
     "motion": [
-      { "name": "ledger-settle", "value": "translateY(5px) to translateY(0), 280ms ease-out", "purpose": "A short arrival for library rows; disabled by reduced-motion preference." }
+      {"name":"state-transition","value":"150ms ease-out","purpose":"Button, menu, field, and hover states."},
+      {"name":"ledger-settle","value":"translateY(5px) to translateY(0), 280ms ease-out","purpose":"Short arrival for library rows."},
+      {"name":"progress-width","value":"300ms ease-out","purpose":"Reading progress changes."},
+      {"name":"reduced-motion","value":"0.01ms","purpose":"Near-instant fallback when reduced motion is requested."}
     ],
-    "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "lg", "value": "1024px" }
-    ]
+    "breakpoints": [{"name":"sm","value":"640px"},{"name":"lg","value":"1024px"}]
   },
   "components": [
     {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The principal import or reading action.",
-      "html": "<button class=\"ds-button-primary\">Add Book</button>",
-      "css": ".ds-button-primary{height:44px;padding:0 16px;border:0;border-radius:10px;background:#173f36;color:#fffdf8;font:500 14px Inter,Arial,sans-serif;cursor:pointer;transition:background-color .2s}.ds-button-primary:hover{background:#254f45}.ds-button-primary:focus-visible{outline:2px solid #35675b;outline-offset:3px}"
+      "name":"Primary Button","kind":"button","refersTo":"button-primary","description":"Principal import, authentication, reading, sync, or recovery action.",
+      "html":"<button class=\"ds-button-primary\">Continue</button>",
+      "css":".ds-button-primary{height:44px;padding:0 16px;border:1px solid transparent;border-radius:10px;background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5);font:500 14px/1.2 Inter,Arial,sans-serif;cursor:pointer;transition:background-color 150ms ease-out,box-shadow 150ms ease-out,opacity 150ms ease-out}.ds-button-primary:hover{opacity:.8}.ds-button-primary:focus-visible{outline:0;border-color:var(--ring,#35675b);box-shadow:0 0 0 3px color-mix(in srgb,var(--ring,#35675b) 50%,transparent)}.ds-button-primary:active{opacity:.9}.ds-button-primary:disabled{opacity:.5;cursor:not-allowed}"
     },
     {
-      "name": "Ledger Row",
-      "kind": "custom",
-      "refersTo": "ledger-row",
-      "description": "A ruled book entry with cover, identity, and progress.",
-      "html": "<div class=\"ds-ledger-row\"><div class=\"ds-book-cover\">M</div><div><strong>The Quiet Chapter</strong><small>Miraf</small></div><span class=\"ds-progress\">42%</span></div>",
-      "css": ".ds-ledger-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #ded8cc;color:#292c29;font:14px Inter,Arial,sans-serif}.ds-ledger-row strong{display:block;font:400 21px 'Instrument Serif',Georgia,serif}.ds-ledger-row small{display:block;margin-top:4px;color:#686b66}.ds-book-cover{display:grid;place-items:center;width:56px;height:84px;border-radius:10px;background:#173f36;color:#fffdf8;font:400 30px 'Instrument Serif',Georgia,serif}.ds-progress{color:#686b66}"
+      "name":"Ghost Button","kind":"button","refersTo":"button-ghost","description":"Quiet secondary or toolbar action.",
+      "html":"<button class=\"ds-button-ghost\">Not now</button>",
+      "css":".ds-button-ghost{height:44px;padding:0 12px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--foreground,#292c29);font:500 14px/1.2 Inter,Arial,sans-serif;cursor:pointer;transition:background-color 150ms ease-out}.ds-button-ghost:hover{background:var(--muted,#f0ece3)}.ds-button-ghost:focus-visible{outline:2px solid var(--ring,#35675b);outline-offset:2px}.ds-button-ghost:active{opacity:.9}"
     },
     {
-      "name": "Continue Panel",
-      "kind": "card",
-      "refersTo": "continue-panel",
-      "description": "One broad featured book with a clear next action.",
-      "html": "<section class=\"ds-continue-panel\"><span>Continue reading</span><h2>The Quiet Chapter</h2><p>Miraf</p><button>Continue</button></section>",
-      "css": ".ds-continue-panel{padding:24px;border:1px solid #ded8cc;border-radius:14px;background:#fdfbf7;color:#292c29}.ds-continue-panel span{font:500 12px Inter,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#686b66}.ds-continue-panel h2{margin:12px 0 4px;font:400 36px 'Instrument Serif',Georgia,serif}.ds-continue-panel p{margin:0 0 24px;color:#686b66;font:14px Inter,Arial,sans-serif}.ds-continue-panel button{height:44px;padding:0 16px;border:0;border-radius:10px;background:#173f36;color:#fffdf8;font:500 14px Inter,Arial,sans-serif}.ds-continue-panel button:hover{background:#254f45}.ds-continue-panel button:focus-visible{outline:2px solid #35675b;outline-offset:3px}"
+      "name":"Text Field","kind":"input","refersTo":"text-field","description":"Full-width paper field for account forms.",
+      "html":"<label class=\"ds-field\"><span>Email</span><input type=\"email\"></label>",
+      "css":".ds-field{display:block;color:var(--foreground,#292c29);font:500 14px/1.2 Inter,Arial,sans-serif}.ds-field input{display:block;width:100%;height:44px;margin-top:8px;padding:0 12px;border:1px solid var(--input,#d6d0c4);border-radius:10px;background:var(--background,#faf7f0);color:var(--foreground,#292c29);font:400 16px/1.5 Inter,Arial,sans-serif;outline:0;transition:border-color 150ms ease-out,box-shadow 150ms ease-out}.ds-field input:hover{border-color:var(--border,#ded8cc)}.ds-field input:focus-visible{border-color:var(--ring,#35675b);box-shadow:0 0 0 2px color-mix(in srgb,var(--ring,#35675b) 20%,transparent)}"
+    },
+    {
+      "name":"Continue Panel","kind":"card","refersTo":"continue-panel","description":"The library's single broad featured book panel.",
+      "html":"<section class=\"ds-continue\"><div class=\"ds-cover\">M</div><div><small>CONTINUE READING</small><h2>The Quiet Chapter</h2><p>Unknown author · 42%</p><button>Continue</button></div></section>",
+      "css":".ds-continue{display:grid;grid-template-columns:96px 1fr;gap:24px;align-items:center;padding:24px;border:1px solid var(--border,#ded8cc);border-radius:14px;background:var(--card,#fdfbf7);color:var(--foreground,#292c29)}.ds-cover{display:grid;place-items:center;width:96px;aspect-ratio:2/3;border-radius:10px;background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5);font:400 40px 'Instrument Serif',Georgia,serif;box-shadow:0 16px 38px -24px rgba(18,60,53,.65)}.ds-continue small{letter-spacing:.16em;color:var(--muted-foreground,#686b66)}.ds-continue h2{margin:10px 0 4px;font:400 36px/1.1 'Instrument Serif',Georgia,serif}.ds-continue p{margin:0 0 20px;color:var(--muted-foreground,#686b66);font:14px Inter,Arial,sans-serif}.ds-continue button{height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5)}.ds-continue button:hover{opacity:.8}.ds-continue button:focus-visible{outline:2px solid var(--ring,#35675b);outline-offset:3px}"
+    },
+    {
+      "name":"Ledger Row","kind":"custom","refersTo":"ledger-row","description":"Ruled book entry with identity, progress, and actions.",
+      "html":"<article class=\"ds-ledger\"><div class=\"ds-row-cover\">M</div><div><strong>The Quiet Chapter</strong><small>Unknown author</small></div><div class=\"ds-progress\"><i><b></b></i><span>42%</span></div><time>Today</time><button aria-label=\"Book actions\">•••</button></article>",
+      "css":".ds-ledger{display:grid;grid-template-columns:64px minmax(180px,1.5fr) minmax(140px,1fr) 90px 44px;align-items:center;gap:20px;padding:16px 0;border-top:1px solid var(--border,#ded8cc);color:var(--foreground,#292c29);font:14px Inter,Arial,sans-serif}.ds-row-cover{display:grid;place-items:center;width:64px;aspect-ratio:2/3;border-radius:10px;background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5);font:400 28px 'Instrument Serif',Georgia,serif}.ds-ledger strong{display:block;font:400 21px 'Instrument Serif',Georgia,serif}.ds-ledger small,.ds-ledger time,.ds-progress span{color:var(--muted-foreground,#686b66)}.ds-progress{display:flex;gap:12px;align-items:center}.ds-progress i{flex:1;height:6px;overflow:hidden;border-radius:9999px;background:color-mix(in srgb,var(--primary,#173f36) 10%,transparent)}.ds-progress b{display:block;width:42%;height:100%;background:var(--primary,#173f36)}.ds-ledger button{width:40px;height:40px;border:0;border-radius:9999px;background:transparent}.ds-ledger button:hover{background:var(--muted,#f0ece3)}.ds-ledger button:focus-visible{outline:2px solid var(--ring,#35675b)}"
+    },
+    {
+      "name":"Migration Callout","kind":"custom","refersTo":"migration-callout","description":"Dismissible invitation to attach browser-only books to the account.",
+      "html":"<section class=\"ds-migration\"><span>↥</span><div><h3>Bring this browser’s books with you</h3><p>2 books are still stored only in this browser.</p></div><div><button>Not now</button><button>Sync all</button></div></section>",
+      "css":".ds-migration{display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:14px;background:var(--muted,#f0ece3);color:var(--foreground,#292c29)}.ds-migration>span{display:grid;place-items:center;width:44px;height:44px;border-radius:9999px;background:var(--background,#faf7f0);color:var(--primary,#173f36)}.ds-migration h3{margin:0;font:400 24px 'Instrument Serif',Georgia,serif}.ds-migration p{margin:4px 0 0;color:var(--muted-foreground,#686b66);font:14px Inter,Arial,sans-serif}.ds-migration>div:last-child{display:flex;gap:8px;margin-left:auto}.ds-migration button{height:40px;padding:0 12px;border:0;border-radius:10px;background:transparent}.ds-migration button:last-child{background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5)}.ds-migration button:hover{opacity:.8}.ds-migration button:focus-visible{outline:2px solid var(--ring,#35675b)}"
+    },
+    {
+      "name":"Recovery State","kind":"custom","refersTo":"recovery-state","description":"Calm ruled region for cache, cloud, or reader failure.",
+      "html":"<section class=\"ds-recovery\"><span>!</span><h2>Cloud library unavailable</h2><p>Cached books are still safe on this device.</p><button>Retry sync</button></section>",
+      "css":".ds-recovery{display:flex;min-height:320px;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;border-block:1px solid var(--border,#ded8cc);text-align:center;color:var(--foreground,#292c29)}.ds-recovery>span{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--muted-foreground,#686b66);border-radius:9999px;color:var(--muted-foreground,#686b66)}.ds-recovery h2{margin:16px 0 0;font:400 28px 'Instrument Serif',Georgia,serif}.ds-recovery p{max-width:460px;margin:8px 0 24px;color:var(--muted-foreground,#686b66);font:16px/1.6 Inter,Arial,sans-serif}.ds-recovery button{height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--primary,#173f36);color:var(--primary-foreground,#fbfaf5)}.ds-recovery button:hover{opacity:.8}.ds-recovery button:focus-visible{outline:2px solid var(--ring,#35675b);outline-offset:3px}"
     }
   ],
   "narrative": {
-    "northStar": "The Chapter Ledger",
-    "overview": "A personal library arranged like a well-kept reading list. Warm paper, deep green ink, and large literary type lead to a quieter page-centered reader.",
-    "keyCharacteristics": ["ruled editorial rows", "bounded reading measure", "restrained green actions", "light, sepia, and dark reading surfaces"],
-    "rules": [
-      { "name": "Book First", "body": "The book and next reading action lead; interface furniture recedes in the reader.", "section": "layout" },
-      { "name": "Flat by Default", "body": "Use fine rules and tonal separation; reserve shadow for covers.", "section": "elevation" }
+    "northStar":"The Chapter Ledger",
+    "overview":"Miraf, ምዕራፍ, means “chapter.” The product feels like opening a well-kept personal reading ledger: warm paper, deep green ink, fine rules, real book covers, and literary type organize a private collection without slipping into nostalgia. It is spacious and precise, with the current book and next reading action always leading the composition.\n\nAuthentication, library, synchronization, and recovery states all belong to this same visual world. Account surfaces use the forest-green brand field more expansively; operational states stay quiet and local to the decision at hand. Once a book opens, the interface recedes further so the EPUB page—not application chrome—owns attention.",
+    "keyCharacteristics":["Warm paper canvases with deep forest actions and fine ledger rules.","Instrument Serif for literary identity; Inter for precise controls and status copy.","One broad continuation panel followed by ruled editorial rows, never a dashboard grid.","Sync is invisible when healthy and explicit only when the reader must understand or act.","Reader chrome inherits the chosen page theme and remains quieter than the library."],
+    "rules":[
+      {"name":"The Quiet Green Rule","body":"Forest Ink is purposeful and relatively scarce on library screens; healthy synchronization never earns another green badge.","section":"colors"},
+      {"name":"The State Needs Meaning Rule","body":"Error Red denotes a failed or destructive state, not urgency theater. Offline and in-progress states use Quiet Text with an icon and plain label.","section":"colors"},
+      {"name":"The Two Voices Rule","body":"Instrument Serif names the place, book, or moment; Inter explains state and enables action. Do not use display type for validation, sync copy, buttons, or dense metadata.","section":"typography"},
+      {"name":"The One Broad Panel Rule","body":"The continuation feature is the library’s only broad bordered panel. Migration is a muted inline callout; ordinary books are ruled rows.","section":"layout"},
+      {"name":"The Page Owns the Reader Rule","body":"Never add permanent sidebars or dashboard furniture that reduce the book unless the reader explicitly opens a sheet.","section":"layout"},
+      {"name":"The Flat-by-Default Rule","body":"Surfaces rest on rules and tonal layering; shadows are reserved for physical book covers and controls that genuinely float above the page.","section":"elevation"},
+      {"name":"The Ledger Edge Rule","body":"Radius belongs to discrete controls and intentional panels, never every content group. Do not turn the library into nested rounded cards.","section":"shapes"}
     ],
-    "dos": ["Keep long-form text at a readable measure.", "Retain covers in mobile library compositions."],
-    "donts": ["Add decorative dashboards or fake book content.", "Let controls compete with the EPUB page."]
+    "dos":["Do preserve Chapter Ledger hierarchy across authentication, library, sync, and recovery.","Do keep covers visible on mobile and long-form text at a readable measure.","Do show sync state only when it changes what the reader understands or can do.","Do explain errors in one sentence and pair recoverable failures with one action.","Do keep controls at least 40px, preferably 44px, with accessible names and visible focus.","Do reduce nonessential animation for prefers-reduced-motion: reduce."],
+    "donts":["Don't turn the library into a dashboard, repeat books in heavy cards, or add promotional statistics.","Don't add gradients, oversized shadows, ornamental book motifs, faux paper, glass panels, or decorative badges.","Don't show success badges on synced books or expose technical cloud/cache language in primary flows.","Don't invent covers, metadata, quotations, reading statistics, claims, or proof.","Don't let reader chrome compete with the page or hide essential controls behind hover.","Don't use color alone for progress, errors, selection, offline, or sync status."]
   }
 }

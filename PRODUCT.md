@@ -8,25 +8,27 @@ web
 
 ## Users
 
-Miraf primarily serves everyday EPUB readers, including the product owner, who already have personal DRM-free EPUB books and want a calm browser-based place to keep and read them. They may read on desktop, tablet, or mobile and expect to resume without setup or an account.
+Miraf serves readers with personal DRM-free EPUB books who want a calm private library that follows them across desktop, tablet, and mobile. V2 requires an account so the library and reading position can remain available across devices.
 
 ## Product Purpose
 
-Miraf is a simple online EPUB reader with a personal browser-based library. It lets readers import an EPUB, retain the book locally, read it in a focused interface, customize the reading experience, and automatically continue from the last reading position.
+Miraf is a private online EPUB reader with a Supabase-backed personal library and an account-scoped browser cache. It lets readers import an EPUB, read it in a focused interface, customize the experience, and continue from the same location on another device.
 
-V1 succeeds when importing, finding, opening, navigating, customizing, leaving, and resuming a book all feel dependable and unobtrusive.
+V2 succeeds when authentication, importing, cloud persistence, caching, opening, navigating, customizing, and cross-device resumption all feel dependable and unobtrusive.
 
 ## Positioning
 
-Miraf leads with a calm reading experience. Local-first storage, no mandatory account, and a deliberately small interface support that promise by keeping setup and application chrome out of the reader's way.
+Miraf leads with a calm reading experience. Private accounts, lazy downloads, browser caching, and a deliberately small interface keep cloud mechanics out of the reader's way.
 
 ## Operating Context
 
 - Readers bring existing `.epub` files from their device and import one book at a time.
-- The library, EPUB files, covers, metadata, reading positions, and progress remain in the current browser profile.
+- EPUB files and covers are private in Supabase Storage; metadata, reading positions, and preferences are private PostgreSQL rows protected by RLS.
+- IndexedDB retains account-scoped cached books and pending changes for speed and loaded-session offline reading.
 - Readers move between a library view and a distraction-free reading view.
 - Reading commonly spans multiple sessions and device orientations, so position restoration and responsive behavior are core workflows.
-- The first local-first release may require connectivity to load the application shell; installed books and state do not require a user account.
+- Authentication is required. Cached books remain locked to their account after sign-out.
+- A loaded session can read cached books offline and synchronize pending changes after reconnecting; offline cold start remains future PWA work.
 
 ## Capabilities and Constraints
 
@@ -36,9 +38,9 @@ Miraf leads with a calm reading experience. Local-first storage, no mandatory ac
 - The reader supports previous/next navigation, table of contents and chapter navigation, keyboard controls, progress, saved-position restoration, and responsive mobile behavior.
 - Reading preferences cover light, sepia, and dark themes; font family, size, and line height; content width; and paginated or scrolling layout.
 - Uploaded publication content is untrusted. Arbitrary EPUB JavaScript, popups, unsafe navigation, and remote publication resource loading must remain disabled or blocked.
-- IndexedDB is the V1 source of truth for books and reading state. Lightweight global preferences may use localStorage. EPUB binaries never belong in transient application state.
-- Authentication, cloud sync, social features, annotations, highlights, reading dashboards, AI features, text-to-speech, translation, recommendations, and marketplaces are outside V1.
-- The architecture must permit later Clerk authentication and Supabase persistence without forcing account or cloud concepts into V1 screens.
+- Supabase is the durable source of truth. IndexedDB is the account-scoped cache and lightweight pending-sync store. EPUB binaries never belong in transient application state.
+- Clerk is the only authentication system. Google OAuth is the primary provider, with email/password retained as a dependable alternative through the same auth boundary. Supabase trusts Clerk session tokens for database and Storage authorization.
+- Social features, annotations, highlights, reading dashboards, AI, text-to-speech, translation, recommendations, marketplaces, and public sharing remain outside V2.
 
 ## Brand Commitments
 
@@ -57,7 +59,7 @@ Miraf leads with a calm reading experience. Local-first storage, no mandatory ac
 
 1. Protect the reading experience from setup, clutter, and unnecessary controls.
 2. Make local ownership and reliable resumption feel effortless.
-3. Prefer a small, understandable V1 over speculative features or abstractions.
+3. Prefer a small, understandable synchronization model over speculative distributed-system machinery.
 4. Keep browser persistence, EPUB behavior, application state, and interface components cleanly separated.
 5. Preserve a straightforward path to optional cloud accounts and synchronization later.
 

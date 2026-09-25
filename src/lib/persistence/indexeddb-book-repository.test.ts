@@ -49,8 +49,27 @@ describe("IndexedDbBookRepository", () => {
     const updated = await repository.getBook("test-book");
     expect(updated).toMatchObject({ progress: 42, currentCfi: "epubcfi(/6/2)" });
 
+    await repository.markOpened("test-book", "2026-01-03T00:00:00.000Z");
+    expect(await repository.getBook("test-book")).toMatchObject({
+      progress: 42,
+      updatedAt: "2026-01-02T00:00:00.000Z",
+      lastOpenedAt: "2026-01-03T00:00:00.000Z",
+    });
+
     await repository.deleteBook("test-book");
     expect(await repository.getBook("test-book")).toBeUndefined();
     expect(await repository.getBookFile("test-book")).toBeUndefined();
+  });
+
+  it("scopes identical fingerprints to separate accounts", async () => {
+    const first = new IndexedDbBookRepository("11111111-1111-1111-1111-111111111111");
+    const second = new IndexedDbBookRepository("22222222-2222-2222-2222-222222222222");
+    await first.saveImportedBook({ ...imported, book: { ...imported.book, id: "account-one-book", fingerprint: "shared-fingerprint" } });
+    await second.saveImportedBook({ ...imported, book: { ...imported.book, id: "account-two-book", fingerprint: "shared-fingerprint" } });
+
+    expect((await first.listBooks()).map((book) => book.id)).toEqual(["account-one-book"]);
+    expect((await second.listBooks()).map((book) => book.id)).toEqual(["account-two-book"]);
+    expect(await first.getBook("account-two-book")).toBeUndefined();
+    expect(await second.getBookFile("account-one-book")).toBeUndefined();
   });
 });

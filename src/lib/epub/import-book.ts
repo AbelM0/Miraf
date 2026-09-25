@@ -2,8 +2,8 @@ import type { BookRepository } from "@/lib/persistence/book-repository";
 import type { BookMetadata, ImportedBook } from "@/types/book";
 import { EpubImportError } from "@/lib/epub/errors";
 import { validateEpubArchive } from "@/lib/epub/validate-epub";
+import { getMaxEpubBytes } from "@/lib/config";
 
-const MAX_EPUB_BYTES = 50 * 1024 * 1024;
 
 type EpubMetadata = {
   title?: unknown;
@@ -52,8 +52,8 @@ function validateFile(file: File) {
   if (file.size === 0) {
     throw new EpubImportError("This EPUB is empty or unreadable.", "corrupt");
   }
-  if (file.size > MAX_EPUB_BYTES) {
-    throw new EpubImportError("This EPUB is larger than the 50 MB V1 limit.", "too-large");
+  if (file.size > getMaxEpubBytes()) {
+    throw new EpubImportError("This EPUB is larger than Miraf's 50 MB limit.", "too-large");
   }
 }
 

@@ -4,19 +4,20 @@ import Image from "next/image";
 import { BookOpenIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { useObjectUrl } from "@/hooks/use-object-url";
-import { libraryService } from "@/lib/services/library-service";
+import { useLibraryService } from "@/components/library/library-provider";
 import { cn } from "@/lib/utils";
 
 type Props = { bookId: string; title: string; hasCover: boolean; className?: string; priority?: boolean };
 
 export function BookCover({ bookId, title, hasCover, className, priority }: Props) {
+  const libraryService = useLibraryService();
   const [cover, setCover] = useState<Blob>();
   const coverUrl = useObjectUrl(cover);
   useEffect(() => {
     let active = true;
     if (hasCover) void libraryService.getBookCover(bookId).then((blob) => { if (active) setCover(blob); });
     return () => { active = false; };
-  }, [bookId, hasCover]);
+  }, [bookId, hasCover, libraryService]);
 
   return (
     <div className={cn("relative isolate aspect-[2/3] overflow-hidden rounded-[10px] bg-primary text-primary-foreground shadow-[0_16px_38px_-24px_rgba(18,60,53,0.65)]", className)}>

@@ -1,9 +1,8 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 import type { ReaderPreferences } from "@/types/reader";
 
-const defaultPreferences: ReaderPreferences = {
+export const defaultPreferences: ReaderPreferences = {
   theme: "light",
   flow: "paginated",
   fontFamily: "serif",
@@ -18,6 +17,7 @@ type ReaderState = {
   settingsOpen: boolean;
   controlsVisible: boolean;
   setPreferences: (update: Partial<ReaderPreferences>) => void;
+  replacePreferences: (preferences: ReaderPreferences) => void;
   resetPreferences: () => void;
   setTocOpen: (open: boolean) => void;
   setSettingsOpen: (open: boolean) => void;
@@ -25,7 +25,6 @@ type ReaderState = {
 };
 
 export const useReaderStore = create<ReaderState>()(
-  persist(
     (set) => ({
       preferences: defaultPreferences,
       tocOpen: false,
@@ -35,15 +34,10 @@ export const useReaderStore = create<ReaderState>()(
         set((state) => ({
           preferences: { ...state.preferences, ...update },
         })),
+      replacePreferences: (preferences) => set({ preferences }),
       resetPreferences: () => set({ preferences: defaultPreferences }),
       setTocOpen: (tocOpen) => set({ tocOpen }),
       setSettingsOpen: (settingsOpen) => set({ settingsOpen }),
       setControlsVisible: (controlsVisible) => set({ controlsVisible }),
     }),
-    {
-      name: "miraf-reader-preferences",
-      partialize: (state) => ({ preferences: state.preferences }),
-    },
-  ),
 );
-

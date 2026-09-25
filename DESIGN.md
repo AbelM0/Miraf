@@ -1,275 +1,258 @@
 ---
-version: "miraf-v1-chapter-ledger"
 name: "Miraf Design System"
-description: "A calm, literary interface for a private, local-first EPUB library and reader."
+description: "The Chapter Ledger: a calm, literary interface for a private cross-device EPUB library."
 colors:
-  primary: "#173F36"
-  primary-foreground: "#FBFAF5"
-  background: "#FAF7F0"
-  surface: "#FDFBF7"
-  foreground: "#292C29"
-  muted: "#F0ECE3"
-  muted-foreground: "#686B66"
-  border: "#DED8CC"
-  focus: "#35675B"
+  forest-ink: "#173F36"
+  warm-white: "#FBFAF5"
+  book-paper: "#FAF7F0"
+  paper-surface: "#FDFBF7"
+  popover-paper: "#FFFDF9"
+  reading-ink: "#292C29"
+  soft-field: "#F0ECE3"
+  sage-wash: "#E1E8E2"
+  quiet-text: "#686B66"
+  ledger-rule: "#DED8CC"
+  field-rule: "#D6D0C4"
+  focus-green: "#35675B"
+  error-red: "oklch(0.577 0.245 27.325)"
   reader-light: "#FFFDF8"
   reader-sepia: "#F2E7CF"
   reader-dark: "#1D2421"
 typography:
   display:
-    fontFamily: "Instrument Serif"
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontSize: "clamp(3rem, 6vw, 4.5rem)"
     fontWeight: 400
-    lineHeight: "0.95–1.1"
-    letterSpacing: "-0.045em"
+    lineHeight: 1
+    letterSpacing: "-0.04em"
+  headline:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontSize: "clamp(1.875rem, 3vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
+  title:
+    fontFamily: "Instrument Serif, Georgia, serif"
+    fontSize: "1.5rem"
+    fontWeight: 400
+    lineHeight: 1.2
   body:
-    fontFamily: "Inter"
+    fontFamily: "Inter, Arial, sans-serif"
+    fontSize: "1rem"
     fontWeight: 400
-    lineHeight: "1.5–1.75"
-  control:
-    fontFamily: "Inter"
+    lineHeight: 1.75
+  label:
+    fontFamily: "Inter, Arial, sans-serif"
+    fontSize: "0.875rem"
     fontWeight: 500
-    lineHeight: "1.2"
-spacing:
-  base: "4px"
-  control-height: "44px"
-  content-gutter-mobile: "20px"
-  content-gutter-tablet: "32px"
-  content-gutter-desktop: "48px"
-  content-max-width: "1440px"
+    lineHeight: 1.2
 rounded:
   control: "10px"
   panel: "14px"
   pill: "9999px"
+spacing:
+  base: "4px"
+  control-height: "44px"
+  gutter-mobile: "20px"
+  gutter-tablet: "32px"
+  gutter-desktop: "48px"
+  content-max: "1440px"
+components:
+  button-primary:
+    backgroundColor: "{colors.forest-ink}"
+    textColor: "{colors.warm-white}"
+    typography: "{typography.label}"
+    rounded: "{rounded.control}"
+    padding: "0 16px"
+    height: "{spacing.control-height}"
+  button-ghost:
+    backgroundColor: "transparent"
+    textColor: "{colors.reading-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.control}"
+    padding: "0 12px"
+    height: "{spacing.control-height}"
+  text-field:
+    backgroundColor: "{colors.book-paper}"
+    textColor: "{colors.reading-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.control}"
+    padding: "0 12px"
+    height: "{spacing.control-height}"
+  continue-panel:
+    backgroundColor: "{colors.paper-surface}"
+    textColor: "{colors.reading-ink}"
+    rounded: "{rounded.panel}"
+    padding: "24px"
 ---
 
-# Miraf Design System
+# Design System: Miraf
 
-Miraf, ምዕራፍ, means “chapter.” Its interface should feel like opening a well-kept personal reading ledger and then watching the application recede when the book begins.
+## Overview
 
-The north star is **The Chapter Ledger**: a warm, spacious library organized with fine rules, real book covers, deep green actions, and large literary type. The reader is quieter than the library and keeps the EPUB page at the center of every decision.
+**Creative North Star: "The Chapter Ledger"**
 
-## Product principles
+Miraf, ምዕራፍ, means “chapter.” The product feels like opening a well-kept personal reading ledger: warm paper, deep green ink, fine rules, real book covers, and literary type organize a private collection without slipping into nostalgia. It is spacious and precise, with the current book and next reading action always leading the composition.
 
-### Book first
+Authentication, library, synchronization, and recovery states all belong to this same visual world. Account surfaces use the forest-green brand field more expansively; operational states stay quiet and local to the decision at hand. Once a book opens, the interface recedes further so the EPUB page—not application chrome—owns attention.
 
-The current book, its cover, and the next reading action lead the composition. Interface furniture supports these elements without competing with them.
+**Key Characteristics:**
 
-### Calm over density
+- Warm paper canvases with deep forest actions and fine ledger rules.
+- Instrument Serif for literary identity; Inter for precise controls and status copy.
+- One broad continuation panel followed by ruled editorial rows, never a dashboard grid.
+- Sync is invisible when healthy and explicit only when the reader must understand or act.
+- Reader chrome inherits the chosen page theme and remains quieter than the library.
 
-Miraf is a personal shelf rather than a catalog or dashboard. Use generous space, short labels, and a small number of strong actions. Avoid statistics panels, promotional modules, and decorative data.
+## Colors
 
-### Local trust
+The palette pairs warm book paper with restrained forest green; structure comes primarily from spacing and fine rules rather than filled containers.
 
-Copy should make local persistence understandable in plain language. Say that books remain in this browser when the information helps the user decide what to do. Do not turn privacy into a marketing badge repeated across the interface.
+### Primary
 
-### Literary, not nostalgic
+- **Forest Ink:** Brand mark, primary actions, fallback covers, progress fills, selected items, and the desktop authentication story panel.
+- **Warm White:** Text and icons placed on Forest Ink.
 
-Instrument Serif provides an editorial voice. Inter keeps controls, metadata, and instructions current and precise. Avoid ornamental book motifs, faux paper textures, skeuomorphic shelves, and antique styling.
+### Secondary
 
-## Color system
+- **Sage Wash:** Selected or gently emphasized states that need green affinity without primary-action weight.
+- **Soft Field:** Muted callouts, hover states, and low-emphasis control backgrounds.
 
-### Library palette
+### Neutral
 
-| Role | Token | Value | Use |
-| --- | --- | --- | --- |
-| Canvas | `background` | `#FAF7F0` | Library background and large quiet areas |
-| Surface | `card` | `#FDFBF7` | Continue panel, dialogs, and elevated local surfaces |
-| Reading ink | `foreground` | `#292C29` | Primary text |
-| Forest ink | `primary` | `#173F36` | Main actions, fallback covers, progress, and brand mark |
-| Soft field | `muted` | `#F0ECE3` | Secondary backgrounds and hover states |
-| Quiet text | `muted-foreground` | `#686B66` | Authors, timestamps, descriptions, and percentages |
-| Rule | `border` | `#DED8CC` | Ledger rows, separators, and panel boundaries |
-| Focus | `ring` | `#35675B` | Keyboard focus indication |
+- **Book Paper:** Main library, authentication form, and light application canvas.
+- **Paper Surface:** Continuation panel and locally elevated paper surfaces.
+- **Popover Paper:** Menus, toasts, and floating controls.
+- **Reading Ink:** Primary text on light surfaces.
+- **Quiet Text:** Metadata, instructions, percentages, timestamps, and secondary copy.
+- **Ledger Rule:** Section separators, ruled rows, panels, and dialog boundaries.
+- **Field Rule:** Input boundaries where a firmer edge improves recognition.
+- **Focus Green:** Keyboard focus borders and rings.
+- **Error Red:** Destructive actions and errors that require attention; never decorative.
 
-Use color by role. Forest green should remain purposeful and relatively scarce. Most structure comes from spacing and fine borders rather than filled containers.
+The reader adds three bounded page themes: **Reader Light**, **Reader Sepia**, and **Reader Dark**. Chrome follows the active theme while preserving contrast.
 
-### Reader palette
+**The Quiet Green Rule.** Forest Ink is purposeful and relatively scarce on library screens; healthy synchronization never earns another green badge.
 
-The reader supports three page themes:
-
-| Theme | Page | Text | Link/accent |
-| --- | --- | --- | --- |
-| Light | `#FFFDF8` | `#292C29` | `#173F36` |
-| Sepia | `#F2E7CF` | `#3D3429` | `#604C32` |
-| Dark | `#1D2421` | `#E9E5DC` | `#B9D2C9` |
-
-Reader chrome inherits the active page theme. It may use translucent backgrounds and restrained blur, but it must preserve text contrast and never obscure the book.
+**The State Needs Meaning Rule.** Error Red denotes a failed or destructive state, not urgency theater. Offline and in-progress states use Quiet Text with an icon and plain label.
 
 ## Typography
 
-### Display type
+**Display Font:** Instrument Serif (with Georgia and serif fallbacks)
 
-Use **Instrument Serif**, weight 400, for the wordmark, library introduction, book titles in featured contexts, empty-state headings, reader titles, and drawer headings.
+**Body Font:** Inter (with Arial and sans-serif fallbacks)
 
-- Library H1: `48–72px`, line-height near `1`, tracking around `-0.045em`.
-- Featured book title: `30–40px`, line-height near `1.1`.
-- Section heading: `24–30px`.
-- Keep headings compact and let them breathe horizontally.
+**Label/Mono Font:** Inter; reserve system monospace for genuinely code-like values.
 
-### Interface type
+**Character:** Instrument Serif gives Miraf a contemporary editorial voice without ornamental book styling. Inter keeps forms, metadata, controls, status messages, and recovery instructions modern and unambiguous.
 
-Use **Inter** for body copy, metadata, controls, progress, timestamps, toast messages, and settings.
+### Hierarchy
 
-- Body: `16–18px` with `1.65–1.75` line-height.
-- Utility text: `14px`.
-- Compact metadata: `11–12px`.
-- Uppercase labels use moderate tracking between `0.14em` and `0.18em` and appear sparingly.
+- **Display** (400, `clamp(3rem, 6vw, 4.5rem)`, line-height `1`): Library and authentication introductions.
+- **Headline** (400, `clamp(1.875rem, 3vw, 2.5rem)`, line-height `1.1`): Featured titles and major empty or recovery states.
+- **Title** (400, `1.5rem`, line-height `1.2`): Sections, dialogs, drawers, migration, and ledger titles.
+- **Body** (400, `1rem`, line-height up to `1.75`): Descriptions and instructions, generally bounded to about `65ch`.
+- **Label** (500, `0.875rem`, line-height `1.2`): Forms and controls. Ledger column labels may use uppercase with `0.16em` tracking.
 
-### EPUB content
+EPUB typography is user-controlled and separate from application type. Offer literary serif and clean sans options plus adjustable size, line height, width, and page or scroll flow.
 
-Book typography is user-controlled and remains separate from the application design system. Provide literary serif and clean sans-serif options, adjustable size and line height, and narrow, standard, and wide reading measures.
+**The Two Voices Rule.** Instrument Serif names the place, book, or moment; Inter explains state and enables action. Do not use display type for validation, sync copy, buttons, or dense metadata.
 
 ## Layout
 
-### Shared frame
+The library frame has a `1440px` maximum width, gutters of `20px` mobile, `32px` tablet, and `48px` desktop, with an approximately `80px` header. Major vertical rhythm expands from roughly `48px` to `80px`.
 
-- Maximum library width: `1440px`.
-- Horizontal gutters: `20px` mobile, `32px` tablet, `48px` desktop.
-- Main library rhythm: `48px` mobile, `64px` tablet, `80px` desktop.
-- Header height: approximately `80px`.
-- Prefer broad horizontal alignment and large quiet areas.
+The authenticated library proceeds from brand header and account actions to a generous introduction, optional migration callout, one continuation panel, and a ruled list. Desktop rows align cover, identity, progress, recency, and actions; mobile retains the cover and folds progress beneath identity. Loading uses skeletons in the intended composition. Empty, cache-failure, and cloud-failure states occupy a calm ruled region rather than a detached card.
 
-### Library
+Authentication is an editorial split screen on large viewports: a forest story panel beside a centered paper form no wider than about `430px`. On small screens, green becomes a shallow masthead containing only the wordmark; the form continues below in one column.
 
-The library follows this order:
+The reader fills the viewport with a `68px` toolbar, flexible EPUB viewport, mobile page controls when needed, and a one-pixel progress rail. Contents opens left and appearance right; each sheet uses at most about `92vw`.
 
-1. Brand header and primary **Add Book** action.
-2. A large “Your library” introduction with one short supporting sentence.
-3. One continuation panel for the most relevant book.
-4. A ruled list of all imported books.
-5. A quiet footer identifying Miraf and its local-first purpose.
+**The One Broad Panel Rule.** The continuation feature is the library’s only broad bordered panel. Migration is a muted inline callout; ordinary books are ruled rows.
 
-The continuation panel is the only broad feature panel. It contains the cover, book identity, progress, recent activity, and one reading action. The rest of the collection uses rows instead of a repeated card grid.
+**The Page Owns the Reader Rule.** Never add permanent sidebars or dashboard furniture that reduce the book unless the reader explicitly opens a sheet.
 
-### Reader
+## Elevation & Depth
 
-The reader occupies the viewport and uses a vertical structure:
+Miraf is flat by default. Fine borders, paper tones, and space establish hierarchy. Book covers receive a restrained shadow (`0 16px 38px -24px rgba(18, 60, 53, 0.65)`); floating reader controls may use a small ambient shadow. Menus, dialogs, sheets, and toasts rely on quiet surface separation rather than dramatic lift.
 
-1. Compact toolbar.
-2. Flexible EPUB viewport.
-3. Mobile navigation when appropriate.
-4. One-pixel progress rail at the bottom.
+The reader toolbar may use a `12px` backdrop blur over a `94%` theme-paper mix, but this is functional continuity—not a glass aesthetic.
 
-The EPUB viewport receives nearly all available space. Desktop navigation sits near the left and right edges. Mobile uses bottom controls and drawer-based settings and contents.
+**The Flat-by-Default Rule.** Surfaces rest on rules and tonal layering; shadows are reserved for physical book covers and controls that genuinely float above the page.
+
+## Shapes
+
+Controls and book covers use gently curved `10px` corners. Structural panels use `14px`. Icon controls, status wells, and progress tracks may be pills. Ledger rows do not gain enclosing radii because their top rule is the defining silhouette.
+
+Use one-pixel borders for fields, panels, toolbars, dialogs, and section boundaries. Preserve covers at `2:3`; fallbacks use Forest Ink, a subtle book symbol, and the actual title.
+
+**The Ledger Edge Rule.** Radius belongs to discrete controls and intentional panels, never every content group. Do not turn the library into nested rounded cards.
 
 ## Components
 
-### Wordmark
+### Buttons
 
-Combine the book/page icon with “Miraf” in Instrument Serif. Use forest green on light surfaces. Keep it compact and provide the accessible label “Miraf library.”
+- **Shape:** `10px` corners with a preferred `44px` task-flow height.
+- **Primary:** Forest Ink with Warm White text for Add Book, authentication, continuing, sync all, and principal recovery.
+- **Hover / Focus:** Hover softens the fill without lifting. Focus uses a visible Focus Green ring. Pending actions change their label and prevent repeat activation.
+- **Ghost / Outline:** Transparent rest states with Soft Field hover; outlined controls use Book Paper and Ledger Rule. Destructive actions use a pale Error Red field.
 
-### Primary button
+### Cards / Containers
 
-- Height: `44px`.
-- Radius: `10px`.
-- Background: forest ink.
-- Text: warm white.
-- Use for importing a book and beginning or continuing reading.
-- Maintain a visible focus ring with an offset.
+- **Continue panel:** Paper Surface, `14px` corners, fine border, one cover at every breakpoint, prominent identity, progress, recency, and one action.
+- **Migration callout:** Soft Field, `14px` corners, paper icon well, concise explanation, **Not now** and **Sync all**. Never blocks reading.
+- **Auth story panel:** Full-height Forest Ink on desktop and shallow masthead on mobile; no decorative imagery.
+- **Recovery regions:** Full-width ruled sections with centered icon, serif title, short explanation, and one recovery action.
 
-### Book cover
+### Inputs / Fields
 
-- Preserve a `2:3` aspect ratio.
-- Radius: `10px`.
-- Real cover art uses `object-fit: cover`.
-- Missing covers use forest green, a subtle book icon, and the actual title.
-- Cover shadow: `0 16px 38px -24px rgba(18, 60, 53, 0.65)`.
+- **Style:** Full-width `44px` paper fields with `10px` corners, Field Rule border, Inter labels, and restrained padding.
+- **Focus:** Border shifts to Focus Green with a soft two-pixel ring.
+- **Error / Success:** Form messages sit above submit in a `10px` tonal field and `aria-live` region. Errors use pale red; confirmation uses a faint Forest Ink wash.
+- **Disabled / Pending:** Preserve legibility, disable repeats, and change the button verb to work in progress.
 
-### Continue panel
+### Navigation
 
-- Radius: `14px` with a fine border.
-- Use one cover at every breakpoint, including mobile.
-- Keep title and author prominent.
-- Show progress and one clear action.
-- Do not add secondary promotional content.
+The wordmark combines the open-book symbol with “Miraf” in Instrument Serif. Library navigation pairs it with Add Book and a circular account trigger. The account menu names the signed-in email, offers legacy sync only when relevant, and ends with sign out.
 
-### Ledger row
+Reader navigation keeps back, contents, and appearance in a symmetrical toolbar. Desktop page arrows float near viewport edges; mobile shows explicit Previous and Next. Icon-only controls have names and visible focus.
 
-- Use a top rule rather than a surrounding card.
-- Desktop columns: cover, book identity, progress, last opened, actions.
-- Mobile columns: cover, identity with progress, actions.
-- Row actions remain behind a clearly labelled overflow button.
+### Ledger Row
+
+Use a top rule, cover, serif title, quiet author, progress, recency, and overflow. Normal synced rows show no status. **On this device**, **Syncing**, and **Sync needs attention** appear only when true; retry belongs in the affected row’s overflow.
 
 ### Progress
 
-Use a thin forest bar on a faint green track with a tabular percentage. Progress must include semantic `progressbar` attributes and should never depend on color alone.
+Use a `6px` rounded Forest Ink bar on a faint green track with a tabular percentage and semantic progress attributes. Width may animate over `300ms` unless reduced motion is requested.
 
-### Drawers and dialogs
+### Dialogs, Sheets, and Toasts
 
-Contents opens from the left; appearance opens from the right. On mobile, both occupy most of the width without covering the entire screen. Titles use Instrument Serif; controls and descriptions use Inter.
+Delete confirmation names the book, explains removal across account and reconnecting caches, and pairs **Keep book** with **Delete everywhere**. Contents and appearance use opposing side sheets with serif titles and Inter controls.
 
-### Toasts
+Toasts use Popover Paper, Ledger Rule, `12px` corners, and semantic icons. Use them for import, deletion, migration, storage, and recoverable reader failures. Loading resolves in place to success or failure. Keep transient banners out of the EPUB page.
 
-Use brief toasts for import success, deletion, storage problems, invalid EPUBs, and recoverable reader failures. Avoid placing transient banners inside the reading page.
+### Sync and Error States
 
-## Responsive behavior
+Global sync status appears in the header only for **Offline** or retryable error; healthy and routine syncing remain quiet. Cached books stay usable during cloud failure. An empty cloud failure gets a dedicated recovery region, while cache-open failure states that the local library did not open and offers **Try again**.
 
-### Mobile
+Reader-fatal failure replaces the viewport with **This chapter cannot open** and **Return to library**. Navigation, position-save, and layout-refresh failures use brief toasts.
 
-- Preserve book covers rather than collapsing to text-only rows.
-- Place the continuation action below the book identity when needed.
-- Use sheets for table of contents and settings.
-- Provide explicit Previous and Next controls in paginated mode.
-- Keep tap targets at least `40px`, preferably `44px`.
+## Do's and Don'ts
 
-### Tablet
+### Do:
 
-- Increase gutters and book-cover size.
-- Retain the compact reader toolbar.
-- Allow library metadata to occupy separate columns when space permits.
+- **Do** preserve Chapter Ledger hierarchy across authentication, library, sync, and recovery.
+- **Do** keep covers visible on mobile and long-form text at a readable measure.
+- **Do** show sync state only when it changes what the reader understands or can do.
+- **Do** explain errors in one sentence and pair recoverable failures with one action.
+- **Do** keep controls at least `40px`, preferably `44px`, with accessible names and visible focus.
+- **Do** reduce nonessential animation for `prefers-reduced-motion: reduce`.
 
-### Desktop
+### Don't:
 
-- Use the full ledger column structure.
-- Place page navigation near the reader edges.
-- Keep the reading measure bounded even on very wide displays.
-- Do not add permanent reader sidebars that reduce the page unless the user opens one.
-
-## Motion
-
-Motion is brief and functional.
-
-- Library rows may settle upward by `5px` over `280ms` with an ease-out curve.
-- Progress width changes may animate over `300ms`.
-- Hover states use color or subtle surface changes rather than dramatic lifts.
-- Reader controls should feel immediate and should not animate the EPUB page unnecessarily.
-- Disable nonessential animation and transitions when `prefers-reduced-motion: reduce` is active.
-
-## Accessibility
-
-- Every icon-only control requires an accessible name.
-- Preserve visible `focus-visible` outlines on all interactive elements.
-- Use semantic headings, buttons, links, navigation, and progress indicators.
-- Maintain sufficient contrast across all three reader themes.
-- Keyboard arrows navigate paginated books unless focus is inside an editable or interactive control.
-- Do not communicate progress, errors, or selection through color alone.
-- Drawers and dialogs must manage focus through their underlying accessible primitives.
-
-## Content voice
-
-Write calmly and directly. Prefer “Add Book,” “Continue,” “Start reading,” and “Return to library.” Explain errors in one sentence and offer a clear recovery action when possible.
-
-Avoid grand claims, technical storage terminology in primary flows, literary clichés, and decorative microcopy. Use the actual book title and author whenever they are available.
-
-## Guardrails
-
-- Do not turn the library into a dashboard.
-- Do not repeat every book inside a heavy card.
-- Do not add gradients, oversized shadows, glass effects, or decorative badges.
-- Do not invent book metadata, covers, quotes, or reading statistics.
-- Do not let reader chrome compete with the EPUB page.
-- Do not use localStorage for EPUB files or book metadata.
-- Do not hide essential reading controls behind hover-only interactions.
-- Keep fixed-layout books, annotations, social features, recommendations, and cloud-sync UI outside V1.
-
-## Canonical implementation references
-
-- Design tokens and reader theme classes: `src/app/globals.css`
-- Library composition: `src/components/library/library-screen.tsx`
-- Featured continuation: `src/components/library/continue-reading.tsx`
-- Ledger rows: `src/components/library/book-row.tsx`
-- Reader shell: `src/components/reader/reader-screen.tsx`
-- Appearance controls: `src/components/reader/reader-settings.tsx`
-- Original external reference: `design-reference/nova-os-landing-page-DESIGN.md`
-
-The root `DESIGN.md` is the source of truth for Miraf. The Nova OS file is reference material only and must not replace this document.
+- **Don't** turn the library into a dashboard, repeat books in heavy cards, or add promotional statistics.
+- **Don't** add gradients, oversized shadows, ornamental book motifs, faux paper, glass panels, or decorative badges.
+- **Don't** show success badges on synced books or expose technical cloud/cache language in primary flows.
+- **Don't** invent covers, metadata, quotations, reading statistics, claims, or proof.
+- **Don't** let reader chrome compete with the page or hide essential controls behind hover.
+- **Don't** use color alone for progress, errors, selection, offline, or sync status.

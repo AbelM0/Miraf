@@ -21,6 +21,9 @@ export type BookRecord = {
   addedAt: string;
   lastOpenedAt?: string;
   updatedAt: string;
+  ownerUserId?: string;
+  cloudState?: "legacy" | "uploading" | "synced" | "error";
+  cloudError?: string;
 };
 
 export type StoredBookFile = {
@@ -45,4 +48,3 @@ export type ImportedBook = {
   file: Blob;
   cover?: Blob;
 };
-
